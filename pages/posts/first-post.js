@@ -1,18 +1,17 @@
 import Head from "next/head";
+import { getPost } from "../../lib/post";
 
 export async function getStaticProps() {
+  console.log('[ FirstPostPage ] getStaticProps()');
+  const post = await getPost('first-post');
+
   return {
-    props: {
-      post: {
-        title: "First Post",
-        body: "My first post, as static props",
-      }
-    },
+    props: { post },
   };
 }
 
 function FirstPostPage({ post }) {
-  console.log('[ FirstPostPage ] render:', post);
+  
   return (
     <>
       <Head>
@@ -21,9 +20,9 @@ function FirstPostPage({ post }) {
       </Head>
       <main>
         <h1>{post.title}</h1>
-        <p>
-          {post.body}
-        </p>
+        <p>published on: {post.date}</p>
+        <article dangerouslySetInnerHTML={{__html: post.body}} />
+        
       </main>
     </>
     
