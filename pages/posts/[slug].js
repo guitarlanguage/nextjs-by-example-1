@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { getPost, getSlugs } from "../../lib/post";
+import { getPost, getSlugs } from "../../lib/posts";
 
 export async function getStaticPaths() {
   const slugs = await getSlugs();
